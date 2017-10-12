@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Add a post</h1>
+<form method='POST'>
+    <p> Blog Title:</p> 
+        <input type="text" name='title' value='{{title}}' />
+    
+    <p>Your Entry:</p> 
+    <textarea name='body' rows="4" cols="50">{{body}}</textarea>
+
+    <input type="submit" value='Add Post' />
+</form>
+   
+{% with messages = get_flashed_messages() %}
+
+<ul class=flashes>
+  {% for message in messages %}
+    <li>{{ message }}</li>
+  {% endfor %}
+  </ul>
+
+{% endwith %}
+
+    {% endblock %}

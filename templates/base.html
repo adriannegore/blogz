@@ -1,8 +1,34 @@
 <!doctype html>
 <html>
     <head>
+    
+    <style>
+        .flashes {
+            color: red;
+            font-weight: bold;
+            }
+        h1 {
+            font-size: 40px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-align: center;
+        }
+        h2 {
+            font-size: 24px;   
+        }
+        p {
+            text-indent: 50px;   
+        }
+    </style>
+    
         <title>{{title}}</title>
+        <nav>
+            <a href='/newpost'>Add a new post</a> |
+            <a href='/blog'> Back to Blog</a>
+    
     </head>
+
 <body>
 
     {% block content %}

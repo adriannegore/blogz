@@ -32,24 +32,28 @@ def newpost():
         db.session.add(new_blog)
         db.session.commit()
 
-        return return render_template('displaypost.html', title=title, body=body)
-
+        this_post=Blog.query.filter(Blog.id==new_blog.id).first()
+        
+        return render_template('displaypost.html', this_post=this_post)
+    
     return render_template('newpost.html')
-
-#@app.route('/displaypost')
-#def displaypost():
- #   title = 'Test title'
-  #  body= 'test body and shit'
-   # return render_template('displaypost.html', title=title, body=body)
-
 
 @app.route('/blog')
 def blog():
 
     blogs = Blog.query.all()
-    
+
+    id=request.args.get('id')
+
+    if id:
+        int_id=(int(id))
+        this_post=Blog.query.filter(Blog.id==int_id).first()
+        return render_template('displaypost.html', this_post=this_post)
+
     return render_template('blog.html',title="Build a Blog", 
         blogs=blogs)
+
+
 
 
 @app.route('/')

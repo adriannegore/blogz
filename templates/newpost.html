@@ -12,14 +12,5 @@
     <input type="submit" value='Add Post' />
 </form>
    
-{% with messages = get_flashed_messages() %}
-
-<ul class=flashes>
-  {% for message in messages %}
-    <li>{{ message }}</li>
-  {% endfor %}
-  </ul>
-
-{% endwith %}
 
     {% endblock %}

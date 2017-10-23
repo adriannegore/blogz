@@ -28,6 +28,9 @@ class User(db.Model):
     def __init__(self, username, password):
         self.username = username
         self.password = password
+    
+    def __repr__(self):
+        return self.username
 
 @app.before_request
 def require_login():
@@ -118,23 +121,24 @@ def newpost():
 @app.route('/blog')
 def blog():
 
-    blogs = Blog.query.all()
+    all_posts = Blog.query.all()
     writers =User.query.all()
     id=request.args.get('id')
+    user=request.args.get('user')
     
-    for blog in blogs:
-        this_post=Blog.query.filter(Blog.id==blog.id).first()
-        writer=User.query.filter(User.id==this_post.owner_id).first()
-    
+   
     if id:
         int_id=int(id)
-
         this_post=Blog.query.filter(Blog.id==int_id).first()
-        writer=User.query.filter(User.id==this_post.owner_id).first()
-        return render_template('displaypost.html', this_post=this_post, writer=writer)
-    
+        return render_template('displaypost.html', this_post=this_post)
+    if user:
+        #user is user's name 'john'
+        #query the database for all blog posts that john owns
+        this_user=User.query.filter(User.username==user).first()
+        all_posts=Blog.query.filter(Blog.owner_id==this_user.id).all()
+        
     return render_template('blog.html',title="Build a Blog", 
-        blogs=blogs, writer=writer)
+        blogs=all_posts)
 
 
 @app.route('/logout')

@@ -6,5 +6,5 @@
 
     <p> {{this_post.body}} </p>
         
-    <p> Written by {{writer.username}} </p>
+    <p> Written by <a href='/blog?user={{this_post.owner}}'>{{this_post.owner}} </a></p>
 {% endblock %}

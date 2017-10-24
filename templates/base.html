@@ -25,16 +25,24 @@
         <title>{{title}}</title>
         <nav>
             <a href='/'>Home</a> |
+            <a href='/blog'> All Posts</a> |
+            <a href='/newpost'>Add a new post</a> 
+           <br> 
             <a href='/login'>Log In</a> |
-            <a href='/signup'>Register</a> |
-            <a href='/newpost'>Add a new post</a> |
-            <a href='/blog'> Back to Blog</a> |
             <a href='/logout'>Log Out</a>
         </nav>
+       <header> {% if session['user'] %}
+        <p>You are currently logged in as {{session['user']}}</p>
+
+        {% else %}
+        
+        <p>You are not logged in. </p>
+      {% endif %}
+    </header>
     </head>
 
 <body>
-    <p>Hi! {{current_user}}</p>
+      
 
     {% with messages = get_flashed_messages() %}
         {% if messages %}
